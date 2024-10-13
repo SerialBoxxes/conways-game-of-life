@@ -1,1 +1,3 @@
 /target
+/.vscode
+/src/gui3.rs
