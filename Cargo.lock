@@ -323,6 +323,50 @@ dependencies = [
 ]
 
 [[package]]
+name = "bevy-inspector-egui"
+version = "0.27.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cac12a22e5de801323bc5bc344949de086b9b8db02c34e109f128ffd41514e5d"
+dependencies = [
+ "bevy-inspector-egui-derive",
+ "bevy_app",
+ "bevy_asset",
+ "bevy_color",
+ "bevy_core",
+ "bevy_core_pipeline",
+ "bevy_ecs",
+ "bevy_egui",
+ "bevy_hierarchy",
+ "bevy_log",
+ "bevy_math",
+ "bevy_pbr",
+ "bevy_reflect",
+ "bevy_render",
+ "bevy_state",
+ "bevy_time",
+ "bevy_utils",
+ "bevy_window",
+ "bytemuck",
+ "egui",
+ "fuzzy-matcher",
+ "image",
+ "pretty-type-name",
+ "smallvec",
+ "winit",
+]
+
+[[package]]
+name = "bevy-inspector-egui-derive"
+version = "0.27.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "89f3be3ba88a25445c0c10684709b1ccd07e37f5f6b5d1b8dcf11d34548f1d61"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.79",
+]
+
+[[package]]
 name = "bevy_a11y"
 version = "0.14.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -801,6 +845,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "66cf695a264b043f2c4edb92dd5c742e6892180d2b30dac870012d153f8557ea"
 dependencies = [
  "glam",
+]
+
+[[package]]
+name = "bevy_pancam"
+version = "0.14.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "09e37f419c99f5e96e8bf34084af33f778facdd6a404c535349a4fd56762ad29"
+dependencies = [
+ "bevy",
 ]
 
 [[package]]
@@ -1496,8 +1549,10 @@ name = "conways_game_of_life"
 version = "0.1.0"
 dependencies = [
  "bevy",
+ "bevy-inspector-egui",
  "bevy_ecs_tilemap",
  "bevy_egui",
+ "bevy_pancam",
 ]
 
 [[package]]
@@ -1943,6 +1998,15 @@ dependencies = [
  "futures-io",
  "parking",
  "pin-project-lite",
+]
+
+[[package]]
+name = "fuzzy-matcher"
+version = "0.3.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "54614a3312934d066701a80f20f15fa3b56d67ac7722b39eea5b4c9dd1d66c94"
+dependencies = [
+ "thread_local",
 ]
 
 [[package]]
@@ -3160,6 +3224,12 @@ name = "presser"
 version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e8cf8e6a8aa66ce33f63993ffc4ea4271eb5b0530a9002db8455ea6050c77bfa"
+
+[[package]]
+name = "pretty-type-name"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f0f73cdaf19b52e6143685c3606206e114a4dfa969d6b14ec3894c88eb38bd4b"
 
 [[package]]
 name = "proc-macro-crate"

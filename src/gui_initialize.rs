@@ -3,10 +3,10 @@ use bevy::prelude::*;
 use bevy::DefaultPlugins;
 use bevy_egui::{egui, EguiContext, EguiContexts, EguiPlugin};
 
-#[derive(Component, Clone)]
+#[derive(Resource, Clone)]
 pub struct Stats {
-    generation: u32,
-    population: u32,
+    pub generation: u32,
+    pub population: u32,
     draw_traces: bool,
 }
 
@@ -22,34 +22,30 @@ impl Default for Stats {
 
 #[derive(Resource, Clone)]
 pub struct GuiSettings {
-    is_playing: bool,
+    pub is_playing: bool,
+    pub play_step: bool,
     reset: bool,
-    time_step: u32,
+    pub time_step: f64,
+    pub paint: bool,
 }
 
 impl Default for GuiSettings {
     fn default() -> Self {
         Self {
             is_playing: false,
+            play_step: false,
             reset: false,
-            time_step: 50,
+            time_step: 10.0,
+            paint: false,
         }
     }
 }
 
-#[derive(Resource)]
-pub struct GreetTimer(pub Timer);
-
-#[derive(Component)]
-pub struct Name(String);
-
-pub fn tstprint(time: Res<Time>, mut timer: ResMut<GreetTimer>, guisettings: Res<GuiSettings>) {
-    if timer.0.tick(time.delta()).just_finished() {
-        println!("Time step is: {:?}ms", guisettings.time_step)
-    }
-}
-
-pub fn ui_gui_window(mut contexts: EguiContexts, mut guisettings: ResMut<GuiSettings>) {
+pub fn ui_gui_window(
+    mut contexts: EguiContexts,
+    mut guisettings: ResMut<GuiSettings>,
+    stats: Res<Stats>,
+) {
     egui::Window::new("Conway's Game of Life").show(contexts.ctx_mut(), |ui| {
         //});
         //egui::CentralPanel::default().show(contexts.ctx_mut(), |ui| {
@@ -60,23 +56,23 @@ pub fn ui_gui_window(mut contexts: EguiContexts, mut guisettings: ResMut<GuiSett
                 .labelled_by(name_label.id);
         });*/
         ui.add(
-            egui::Slider::new(&mut guisettings.time_step, 50..=1000)
-                .step_by(50.0)
-                .text("Game Speed:"),
+            egui::Slider::new(&mut guisettings.time_step, 1.0..=100.0)
+                .step_by(1.0)
+                .text("Game Speed: TPS"),
         );
         ui.horizontal(|ui| {
             if ui.button("Start").clicked() {
-                //self.is_paused = false;
+                guisettings.is_playing = true;
             }
             if ui.button("Stop").clicked() {
-                //self.is_paused = true;
+                guisettings.is_playing = false;
             }
         });
 
         if ui.button("Step").clicked() {
-            //self.population += 1;
+            guisettings.play_step = true;
         }
-        ui.label(format!("Generation: {}", 0));
-        ui.label(format!("Population: {}", 0));
+        ui.label(format!("Generation: {}", stats.generation));
+        ui.label(format!("Population: {}", stats.population));
     });
 }
