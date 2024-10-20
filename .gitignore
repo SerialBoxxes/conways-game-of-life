@@ -1,3 +1,4 @@
 /target
 /.vscode
 /src/gui3.rs
+/src/sim.rs
